@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"github.com/yosuke-furukawa/json5/encoding/json5"
 	"log"
 	"net"
 	"net/url"
@@ -103,7 +104,7 @@ func handler(conn net.Conn) {
 		entry = entry[bytes.IndexByte(entry, '\n'):]
 
 		// Unmarshal JSON from VCS into the Entry struct
-		if err := json.Unmarshal(entry, &e); err != nil {
+		if err := json5.Unmarshal(entry, &e); err != nil {
 			log.Printf("Ignoring unparseable input data.")
 			continue
 		}
